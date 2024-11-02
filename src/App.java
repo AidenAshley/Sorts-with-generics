@@ -2,17 +2,17 @@ import java.io.*;
 import java.util.Random; 
 import java.util.Scanner; 
 
-public class App<T extends Comparable<T>> 
+public class App 
 {
 
-    public static <T extends Comparable<T>> T[] createRandomArray(int arrayLength) 
+    public static Integer[] createRandomArray(int arrayLength) 
     {
         Random random = new Random(); 
-        T[] array = (T[]) new Comparable[arrayLength]; 
+        Integer[] array = new Integer[arrayLength]; 
 
         for (int i = 0; i < arrayLength; i++) 
         {
-            array[i] = (T) Integer.valueOf(random.nextInt(101)); 
+            array[i] = random.nextInt(101); 
         }
         return array; 
     }
@@ -88,6 +88,23 @@ public class App<T extends Comparable<T>>
         }
     }
 
+    public static <T extends Comparable<T>> void bubbleSort(T[] array) 
+    {
+        int n = array.length; 
+        for (int i = 0; i < n - 1; i++) 
+        {
+            for (int j = 0; j < n - i - 1; j++) 
+            {
+                if (array[j].compareTo(array[j + 1]) > 0) 
+                {
+                    T temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) 
     {
         Scanner scanner = new Scanner(System.in); 
@@ -111,10 +128,27 @@ public class App<T extends Comparable<T>>
         System.out.println(); 
 
         mergeSort(readArray);
-
-        System.out.println("Sorted array:");
+        System.out.println("Sorted array using merge sort:");
 
         for (Integer num : readArray) 
+        {
+            System.out.print(num + " "); 
+        }
+        System.out.println(); 
+
+        randomArray = createRandomArray(length);
+        System.out.println("Array before bubble sort:");
+
+        for (Integer num : randomArray) 
+        {
+            System.out.print(num + " "); 
+        }
+        System.out.println(); 
+
+        bubbleSort(randomArray);
+        System.out.println("Sorted array using bubble sort:");
+
+        for (Integer num : randomArray) 
         {
             System.out.print(num + " "); 
         }
